@@ -37,7 +37,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Add the load path for emacs
-(add-to-list 'load-path "~/zhengemacs")
+(add-to-list 'load-path "~/zhengconfigs")
 
 ;; c++ mode for .h file.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
