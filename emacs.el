@@ -18,21 +18,31 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Key bindings ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key "\C-z" 'eshell)
-(global-set-key "\ek" 'switch-to-buffer)
-(global-set-key "\eo" 'other-window)
-(global-set-key "\e0" 'delete-window)
-(global-set-key "\e1" 'delete-other-windows)
-(global-set-key "\e2" 'split-window)
-(global-set-key "\e3" 'split-window-horizontally)
-(global-set-key "\e5" 'query-replace-regexp)
 (global-set-key "\C-cb" 'bury-buffer)
 (global-set-key "\C-c\C-f" 'font-lock-mode)
 (global-set-key "\C-xp" 'repeat-complex-command)
+
+(global-set-key "\ek" 'next-line)
+(global-set-key "\ei" 'previous-line)
+(global-set-key "\el" 'forward-char)
+(global-set-key "\ej" 'backward-char)
+
+(global-set-key (kbd "C-M-k") 'scroll-up)
+(global-set-key (kbd "C-M-i") 'scroll-down)
+
+(global-set-key "\e;" 'switch-to-buffer)
+(global-set-key "\eo" 'other-window)
+(global-set-key "\e0" 'delete-window)
+(global-set-key "\e1" 'delete-other-windows)
+(global-set-key "\e5" 'query-replace-regexp)
 (global-set-key "\ep" 'backward-paragraph)
 (global-set-key "\en" 'forward-paragraph)
 (global-set-key "\e]" 'delete-indentation)
-(global-set-key "\ei" 'gid)
+(global-set-key "\eh" 'gid)
 (global-set-key "\es" 'query-replace)
+(global-set-key "\e{" 'shrink-window-horizontally)
+(global-set-key "\e}" 'enlarge-window-horizontally)
+(global-set-key "\e*" 'isearch-forward-symbol-at-point)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -87,7 +97,10 @@
 ;; gid stuff
 (autoload 'gid "idutils" nil t)
 
-(add-to-list 'default-frame-alist '(background-color . "#FEF49C"))
+;; buffer-move
+(load-library "buffer-move")
+
+;(add-to-list 'default-frame-alist '(background-color . "#FEF49C"))
 
 (setq line-number-mode t)
 (setq column-number-mode t)
