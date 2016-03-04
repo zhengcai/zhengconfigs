@@ -11,7 +11,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # aliases
-alias ll='ls -alF'
+alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CF'
 alias em='emacs -nw'

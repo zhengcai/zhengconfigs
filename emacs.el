@@ -13,7 +13,56 @@
 (setq auto-save-list-file-prefix
             (concat user-temporary-file-directory ".auto-saves-"))
 (setq auto-save-file-name-transforms
-            `((".*" ,user-temporary-file-directory t)))
+      `((".*" ,user-temporary-file-directory t)))
+
+;;;;;;;;;;;;;;;;; isearch-forward-symbol-at-point ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun isearch-forward-symbol-at-point ()
+  "Do incremental search forward for a symbol found near point.
+Like ordinary incremental search except that the symbol found at point
+is added to the search string initially as a regexp surrounded
+by symbol boundary constructs \\_< and \\_>.
+See the command `isearch-forward-symbol' for more information."
+  (interactive)
+  (isearch-forward-symbol nil 1)
+  (let ((bounds (find-tag-default-bounds)))
+    (cond
+     (bounds
+      (when (< (car bounds) (point))
+	(goto-char (car bounds)))
+      (isearch-yank-string
+       (buffer-substring-no-properties (car bounds) (cdr bounds))))
+     (t
+      (setq isearch-error "No symbol at point")
+      (isearch-update)))))
+
+(defun find-tag-default-bounds ()
+  "Determine the boundaries of the default tag, based on text at point.
+Return a cons cell with the beginning and end of the found tag.
+If there is no plausible default, return nil."
+  (let (from to bound)
+    (when (or (progn
+		;; Look at text around `point'.
+		(save-excursion
+		  (skip-syntax-backward "w_") (setq from (point)))
+		(save-excursion
+		  (skip-syntax-forward "w_") (setq to (point)))
+		(> to from))
+	      ;; Look between `line-beginning-position' and `point'.
+	      (save-excursion
+		(and (setq bound (line-beginning-position))
+		     (skip-syntax-backward "^w_" bound)
+		     (> (setq to (point)) bound)
+		     (skip-syntax-backward "w_")
+		     (setq from (point))))
+	      ;; Look between `point' and `line-end-position'.
+	      (save-excursion
+		(and (setq bound (line-end-position))
+		     (skip-syntax-forward "^w_" bound)
+		     (< (setq from (point)) bound)
+		     (skip-syntax-forward "w_")
+		     (setq to (point)))))
+      (cons from to))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Key bindings ;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -30,7 +79,7 @@
 (global-set-key (kbd "C-M-k") 'scroll-up)
 (global-set-key (kbd "C-M-i") 'scroll-down)
 
-(global-set-key "\e;" 'switch-to-buffer)
+(global-set-key "\e " 'switch-to-buffer)
 (global-set-key "\eo" 'other-window)
 (global-set-key "\e0" 'delete-window)
 (global-set-key "\e1" 'delete-other-windows)
@@ -42,7 +91,7 @@
 (global-set-key "\es" 'query-replace)
 (global-set-key "\e{" 'shrink-window-horizontally)
 (global-set-key "\e}" 'enlarge-window-horizontally)
-(global-set-key "\e*" 'isearch-forward-symbol-at-point)
+(global-set-key "\e;" 'isearch-forward-symbol-at-point)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -99,6 +148,11 @@
 
 ;; buffer-move
 (load-library "buffer-move")
+(defalias 'mr 'buf-move-right)
+(defalias 'ml 'buf-move-left)
+
+;; revert-buffer alias
+(defalias 'rb 'revert-buffer)
 
 ;(add-to-list 'default-frame-alist '(background-color . "#FEF49C"))
 
@@ -111,6 +165,8 @@
   "Ignore all non-user (a.k.a. *starred*) buffers except *ielm*."
   (and (string-match "^\*" name)))
 (setq ido-ignore-buffers '("\\` " ido-ignore-non-user-except))
+
+(setq recenter-positions '(top middle bottom))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
