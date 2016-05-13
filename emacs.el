@@ -92,6 +92,9 @@ If there is no plausible default, return nil."
 (global-set-key "\e{" 'shrink-window-horizontally)
 (global-set-key "\e}" 'enlarge-window-horizontally)
 (global-set-key "\e;" 'isearch-forward-symbol-at-point)
+(global-set-key "\ea" 'back-to-indentation)
+(global-set-key "\ee" 'move-end-of-line)
+(global-set-key "\em" 'goto-line)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -153,6 +156,9 @@ If there is no plausible default, return nil."
 
 ;; revert-buffer alias
 (defalias 'rb 'revert-buffer)
+
+;; delete-trainling-whitespace
+(defalias 'dt 'delete-trailing-whitespace)
 
 ;(add-to-list 'default-frame-alist '(background-color . "#FEF49C"))
 
