@@ -222,6 +222,7 @@ If there is no plausible default, return nil."
 
 (require 'column-marker)
 (add-hook 'c++-mode-hook (lambda () (interactive)(column-marker-3 79)))
+(global-auto-revert-mode t)
 
 ;; Old unused stuff
 
