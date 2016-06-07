@@ -220,6 +220,9 @@ If there is no plausible default, return nil."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'column-marker)
+(add-hook 'c++-mode-hook (lambda () (interactive)(column-marker-3 79)))
+
 ;; Old unused stuff
 
 ;; Switch RET and LF. Makes <return> indent.
