@@ -95,6 +95,8 @@ If there is no plausible default, return nil."
 (global-set-key "\ea" 'back-to-indentation)
 (global-set-key "\ee" 'move-end-of-line)
 (global-set-key "\em" 'goto-line)
+(global-set-key "\e." 'forward-sexp)
+(global-set-key "\e," 'backward-sexp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -197,29 +199,6 @@ If there is no plausible default, return nil."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; meta-Enter on the IBM thinkpad in Arora 6 generates meta-return
-;; when in an x window, and meta-linefeed when a terminal
-(global-set-key '[(meta return)]  'dabbrev-expand)
-(global-set-key '[(meta linefeed)]  'dabbrev-expand)
-
-;; Make it so that "C-x h" in text mode views as HTML
-;; (by opening a web browser)
-(add-hook 'text-mode-hook
-	  (lambda nil
-	    (local-set-key "\C-xh" 'browse-url-of-buffer)))
-
-(when (featurep 'xemacs)
-    (autoload 'filladapt-mode "filladapt" "A better way of indenting text")
-      (add-hook 'text-mode-hook 'filladapt-mode))
-
-;; Assign F1-F4 to shells 1-4
-(define-key global-map [f1] (lambda () (interactive) (ashell ?1)))
-(define-key global-map [f2] (lambda () (interactive) (ashell ?2)))
-(define-key global-map [f3] (lambda () (interactive) (ashell ?3)))
-(define-key global-map [f4] (lambda () (interactive) (ashell ?4)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'column-marker)
 (add-hook 'c++-mode-hook (lambda () (interactive)(column-marker-3 79)))
 (global-auto-revert-mode t)
@@ -241,3 +220,26 @@ If there is no plausible default, return nil."
 ;(require 'tramp)
 ;(load-library "python-pylint")
 ;(global-set-key (kbd "C-x y") 'python-pylint)
+
+;; ;; meta-Enter on the IBM thinkpad in Arora 6 generates meta-return
+;; ;; when in an x window, and meta-linefeed when a terminal
+;; (global-set-key '[(meta return)]  'dabbrev-expand)
+;; (global-set-key '[(meta linefeed)]  'dabbrev-expand)
+
+;; ;; Make it so that "C-x h" in text mode views as HTML
+;; ;; (by opening a web browser)
+;; (add-hook 'text-mode-hook
+;; 	  (lambda nil
+;; 	    (local-set-key "\C-xh" 'browse-url-of-buffer)))
+
+;; (when (featurep 'xemacs)
+;;     (autoload 'filladapt-mode "filladapt" "A better way of indenting text")
+;;       (add-hook 'text-mode-hook 'filladapt-mode))
+
+;; ;; Assign F1-F4 to shells 1-4
+;; (define-key global-map [f1] (lambda () (interactive) (ashell ?1)))
+;; (define-key global-map [f2] (lambda () (interactive) (ashell ?2)))
+;; (define-key global-map [f3] (lambda () (interactive) (ashell ?3)))
+;; (define-key global-map [f4] (lambda () (interactive) (ashell ?4)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
