@@ -114,6 +114,7 @@ If there is no plausible default, return nil."
 (global-set-key "\e." 'forward-sexp)
 (global-set-key "\e," 'backward-sexp)
 (global-set-key "\ec" 'copy-symbol-at-point)
+(global-set-key "\ev" 'yank)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
