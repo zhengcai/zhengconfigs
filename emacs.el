@@ -17,6 +17,22 @@
 
 ;;;;;;;;;;;;;;;;; isearch-forward-symbol-at-point ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun copy-symbol-at-point ()
+  "Copy the symbol found near point to the clipboard."
+  (interactive)
+  (let ((bounds (find-tag-default-bounds)))
+    (cond
+     (bounds
+      (when (< (car bounds) (point))
+	(goto-char (car bounds)))
+      (kill-new
+       (buffer-substring-no-properties (car bounds) (cdr bounds)))
+      (message "%s copied to the clipboard!"
+	       (buffer-substring-no-properties (car bounds) (cdr bounds))))
+     (t
+      (error "No symbol at point")))))
+
+
 (defun isearch-forward-symbol-at-point ()
   "Do incremental search forward for a symbol found near point.
 Like ordinary incremental search except that the symbol found at point
@@ -97,6 +113,7 @@ If there is no plausible default, return nil."
 (global-set-key "\em" 'goto-line)
 (global-set-key "\e." 'forward-sexp)
 (global-set-key "\e," 'backward-sexp)
+(global-set-key "\ec" 'copy-symbol-at-point)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 

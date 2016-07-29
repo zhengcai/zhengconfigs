@@ -24,7 +24,7 @@ alias untracked='git ls-files . --exclude-standard --others'
 alias lint='clear ; find ./ -name "*.h" -o -name "*.cc" | xargs ~/workspace/main/open_tools/codereview/cpplint.py'
 alias difflint='clear ; cd ~/workspace/main ; git diff origin/master --name-only | xargs ~/workspace/main/open_tools/codereview/cpplint.py'
 alias review='~/workspace/main/open_tools/codereview/upload.py --rev=origin/master --no_oauth2_webbrowser -e zheng@cohesity.com'
-alias bid='cd ~/workspace/main ; mkid -p build -p builds -s'
+alias bid='cd ~/workspace/main ; rm ID ; mkid -p build -p builds -s ; mv ID build/ ; ln -s build/ID ./ID'
 alias btags='cd ~/workspace/main ; find . -type f -iname "*.proto" | grep -v "/builds/" | etags -'
 
 alias pass='sshpass -p fr8shst8rt ssh -o StrictHostKeyChecking=no'
