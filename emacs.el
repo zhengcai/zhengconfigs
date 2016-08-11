@@ -80,6 +80,28 @@ If there is no plausible default, return nil."
 		     (setq to (point)))))
       (cons from to))))
 
+;;;;;;;;;;;; Indent to 4 spaces from the previous line's beginning ;;;;;;;;;;;;
+
+(defun indent-4-spaces ()
+  "Indent to 4 spaces from the previous line's beginning."
+  (interactive)
+  (forward-line -1)
+  (back-to-indentation)
+  (let ((indent-str (make-string (+ 4 (current-column)) ? )))
+    (forward-line 1)
+    (back-to-indentation)
+    (delete-horizontal-space)
+    (insert indent-str)))
+
+(defun break-and-indent-4-spaces ()
+  "Create a new line and indent to 4 spaces from the previous line's beginning"
+  (interactive)
+  (back-to-indentation)
+  (let ((indent-str (make-string (+ 4 (current-column)) ? )))
+    (end-of-line)
+    (newline)
+    (insert indent-str)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Key bindings ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key "\C-z" 'eshell)
@@ -91,9 +113,6 @@ If there is no plausible default, return nil."
 (global-set-key "\ei" 'previous-line)
 (global-set-key "\el" 'forward-char)
 (global-set-key "\ej" 'backward-char)
-
-(global-set-key (kbd "C-M-k") 'scroll-up)
-(global-set-key (kbd "C-M-i") 'scroll-down)
 
 (global-set-key "\e " 'switch-to-buffer)
 (global-set-key "\eo" 'other-window)
@@ -115,6 +134,12 @@ If there is no plausible default, return nil."
 (global-set-key "\e," 'backward-sexp)
 (global-set-key "\ec" 'copy-symbol-at-point)
 (global-set-key "\ev" 'yank)
+(global-set-key "\ez" 'undo)
+
+(global-set-key (kbd "M-RET") 'break-and-indent-4-spaces)
+(global-set-key (kbd "C-M-\\") 'indent-4-spaces)
+(global-set-key (kbd "C-M-k") 'scroll-up)
+(global-set-key (kbd "C-M-i") 'scroll-down)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;; Modes for different languages ;;;;;;;;;;;;;;;;;;;;;;;
 
