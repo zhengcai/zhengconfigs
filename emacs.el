@@ -19,6 +19,9 @@
 (setq sh-basic-offset 2)
 (setq sh-indentation 2)
 
+;; Set tab width to be 2 spaces.
+(setq tab-width 2)
+
 (load "~/zhengconfigs/clang-format")
 
 ;;;;;;;;;;;;;;;;; isearch-forward-symbol-at-point ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
