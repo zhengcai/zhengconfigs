@@ -15,6 +15,12 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
+;; Set bash script indentation to be 2 spaces.
+(setq sh-basic-offset 2)
+(setq sh-indentation 2)
+
+(load "~/zhengconfigs/clang-format")
+
 ;;;;;;;;;;;;;;;;; isearch-forward-symbol-at-point ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun copy-symbol-at-point ()
@@ -112,9 +118,13 @@ If there is no plausible default, return nil."
 (global-set-key "\ej" 'backward-char)
 
 (global-set-key "\e " 'switch-to-buffer)
+;(global-set-key "\e " 'buffer-menu)
 (global-set-key "\eo" 'other-window)
-(global-set-key "\e0" 'delete-window)
-(global-set-key "\e1" 'delete-other-windows)
+(global-set-key "\e0" 'ido-kill-buffer)
+(global-set-key "\et"
+ '(lambda () (interactive) (delete-other-windows) (split-window-right 81)))
+;(global-set-key "\e0" 'delete-window)
+;(global-set-key "\e1" 'delete-other-windows)
 (global-set-key "\e5" 'query-replace-regexp)
 (global-set-key "\ep" 'backward-paragraph)
 (global-set-key "\en" 'forward-paragraph)
@@ -134,6 +144,9 @@ If there is no plausible default, return nil."
 (global-set-key "\ez" 'undo)
 (global-set-key "\en" 'scroll-up)
 (global-set-key "\eu" 'scroll-down)
+(global-set-key "\ey" 'clang-format-region)
+(global-set-key "\e/" 'comment-region)
+(global-set-key "\e'" 'uncomment-region)
 
 (global-set-key (kbd "M-RET") 'break-and-indent-4-spaces)
 (global-set-key (kbd "C-M-\\") 'indent-4-spaces)
@@ -183,6 +196,12 @@ If there is no plausible default, return nil."
        '(("\\.psm1\\'" . powershell-mode))
        auto-mode-alist))
 (autoload 'powershell-mode "powershell-mode" t)
+
+;; python hooks
+(add-hook 'python-mode-hook
+	  (function (lambda ()
+                      (setq indent-tabs-mode nil
+                            tab-width 2))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

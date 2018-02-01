@@ -1,0 +1,16 @@
+﻿---
+BasedOnStyle: Google
+Standard: Cpp11
+---
+Language: Cpp
+# Force pointers to the variable name
+DerivePointerAlignment: false
+PointerAlignment: Left
+ColumnLimit: 79
+AlignEscapedNewlinesLeft: false
+BinPackArguments: false
+BinPackParameters: false
+---
+Language: Java
+ColumnLimit: 79
+...
