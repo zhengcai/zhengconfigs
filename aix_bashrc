@@ -1,13 +1,15 @@
 export GOPATH=/go
-export TOP=~/workspace/src/cohesity
 export PROTOBUF_DIR=/home/root/protobuf-3.5.1/src
 export LC_ALL=en_US.UTF-8
+export HISTCONTROL=ignoreboth:erasedups
+export TOP=~/workspace/src/cohesity
 
 alias vim='/usr/linux/bin/vi -N -u /home/zheng/vimrc'
 alias home='cd /home/zheng'
 alias em='emacs'
 alias gtop='cd $TOP'
 alias review='$TOP/open_tools/codereview/upload.py --no_oauth2_webbrowser'
+alias bid='rm ID ; mkid -p build -p builds -s'
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
   eval `ssh-agent -s`
