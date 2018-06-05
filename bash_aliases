@@ -30,6 +30,7 @@ alias btags='find . -type f -iname "*.proto" | grep -v "/builds/" | etags -'
 alias pass='sshpass -p fr8shst8rt ssh -o StrictHostKeyChecking=no'
 alias qapass='sshpass -p Cohe\$1ty ssh -o StrictHostKeyChecking=no'
 alias mkexp='make -j30 EXPERIMENTAL_SUBDIR=zheng'
+alias gcp='git cherry-pick'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
