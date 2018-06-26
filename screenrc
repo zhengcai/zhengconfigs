@@ -1,0 +1,20 @@
+escape ^]]
+
+shell "/opt/freeware/bin/bash"
+
+autodetach on
+startup_message off
+hardstatus alwayslastline
+shelltitle 'bash'
+
+hardstatus string '%{gk}[%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}][%{d}%l%{g}][ %{= w}%Y/%m/%d %0C:%s%a%{g} ]%{W}'
+
+bindkey "\033\061" select 1
+bindkey "\033\062" select 2
+bindkey "\033\063" select 3
+bindkey "\033\064" select 4
+bindkey "\033\065" select 5
+bindkey "\033\066" select 6
+bindkey "\033\067" select 7
+bindkey "\033\068" select 8
+bindkey "\033\069" select 9
