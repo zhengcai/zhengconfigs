@@ -206,6 +206,18 @@ If there is no plausible default, return nil."
                       (setq indent-tabs-mode nil
                             tab-width 2))))
 
+;; java mode.
+;; (add-hook 'java-mode-hook
+;; 	  (function (lambda ()
+;;                       (setq indent-tabs-mode nil
+;;                             tab-width 2))))
+(custom-set-variables '(c-basic-offset 2))
+
+;; gradle mode
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
+(add-to-list 'auto-mode-alist '("\\.groovy\\'" . groovy-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; M-q column width
