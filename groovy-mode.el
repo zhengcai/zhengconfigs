@@ -630,7 +630,7 @@ dollar-slashy-quoted strings."
   "A Groovy major mode."
   :group 'languages)
 
-(defcustom groovy-indent-offset 4
+(defcustom groovy-indent-offset 2
   "Indentation amount for Groovy."
   :safe #'integerp
   :group 'groovy)
