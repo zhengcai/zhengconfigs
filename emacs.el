@@ -213,6 +213,11 @@ If there is no plausible default, return nil."
 ;;                       (setq indent-tabs-mode nil
 ;;                             tab-width 2))))
 (custom-set-variables '(c-basic-offset 2))
+;; javascript mode
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
 ;; gradle mode
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
